@@ -1,0 +1,11 @@
+name: Spike
+description: 技術調査・設計検討
+labels: ["type:spike"]
+body:
+  - type: textarea
+    attributes:
+      label: Question
+  - type: textarea
+    attributes:
+      label: Outcome
+      description: 結論として何が分かればDoneか

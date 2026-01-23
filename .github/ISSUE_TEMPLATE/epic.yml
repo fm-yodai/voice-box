@@ -1,0 +1,17 @@
+name: Epic
+description: 大きな価値単位
+labels: ["type:epic"]
+body:
+  - type: textarea
+    attributes:
+      label: Goal
+      description: このEpicで達成したい価値
+  - type: textarea
+    attributes:
+      label: Success Criteria
+  - type: textarea
+    attributes:
+      label: Out of Scope
+  - type: textarea
+    attributes:
+      label: Notes

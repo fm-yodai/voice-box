@@ -1,0 +1,25 @@
+name: Story
+description: ユーザーストーリー
+labels: ["type:story"]
+body:
+  - type: textarea
+    attributes:
+      label: User Story
+      description: As a / I want / So that
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Acceptance Criteria
+      description: 箇条書きでOK
+    validations:
+      required: true
+
+  - type: checkboxes
+    attributes:
+      label: Definition of Ready
+      options:
+        - label: Acceptance Criteriaが明確
+        - label: 依存関係が解消されている
+        - label: セキュリティ/匿名性影響を確認した
