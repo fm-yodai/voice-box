@@ -1,0 +1,29 @@
+{
+  "name": "@voice-box/backend",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.19.9",
+    "@voice-box/shared": "workspace:*",
+    "dotenv": "^17.2.4",
+    "hono": "^4.11.8",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.1",
+    "@vitest/coverage-v8": "^4.0.18",
+    "tsx": "^4.21.0",
+    "vitest": "^4.0.18"
+  }
+}

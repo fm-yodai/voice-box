@@ -1,0 +1,47 @@
+{
+  "semantic": {
+    "$description": "Semantic tokens for light mode",
+    "color": {
+      "$type": "color",
+      "bg": {
+        "primary": { "$value": "{color.primitive.neutral.gofun}" },
+        "secondary": { "$value": "{color.primitive.neutral.kinari}" },
+        "surface": { "$value": "{color.primitive.neutral.shironeri}" },
+        "inverse": { "$value": "{color.primitive.ai.900}" }
+      },
+      "text": {
+        "primary": { "$value": "{color.primitive.neutral.shikkoku}" },
+        "secondary": { "$value": "{color.primitive.neutral.sumi}" },
+        "muted": { "$value": "{color.primitive.neutral.nezumi}" },
+        "inverse": { "$value": "{color.primitive.neutral.gofun}" }
+      },
+      "brand": {
+        "primary": { "$value": "{color.primitive.ai.500}" },
+        "primary-hover": { "$value": "{color.primitive.ai.600}" },
+        "primary-active": { "$value": "{color.primitive.ai.700}" }
+      },
+      "accent": {
+        "default": { "$value": "{color.primitive.shu.500}" },
+        "hover": { "$value": "{color.primitive.kurenai.500}" }
+      },
+      "feedback": {
+        "success": { "$value": "{color.primitive.tokiwa.500}" },
+        "warning": { "$value": "{color.primitive.yamabuki.500}" },
+        "error": { "$value": "{color.primitive.kurenai.500}" },
+        "info": { "$value": "{color.primitive.ai.400}" }
+      },
+      "border": {
+        "default": { "$value": "{color.primitive.neutral.gin-nezu}" },
+        "subtle": { "$value": "{color.primitive.neutral.shironeri}" },
+        "emphasis": { "$value": "{color.primitive.ai.500}" }
+      },
+      "link": {
+        "default": { "$value": "{color.primitive.ai.500}" },
+        "hover": { "$value": "{color.primitive.ai.700}" }
+      },
+      "focus": {
+        "ring": { "$value": "{color.primitive.ai.300}" }
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "component": {
+    "$description": "Component-level tokens",
+    "button": {
+      "color": {
+        "$type": "color",
+        "bg": { "$value": "{semantic.color.brand.primary}" },
+        "bg-hover": { "$value": "{semantic.color.brand.primary-hover}" },
+        "text": { "$value": "{semantic.color.text.inverse}" }
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{border-radius.md}"
+      },
+      "padding-x": {
+        "$type": "dimension",
+        "$value": "{spacing.4}"
+      },
+      "padding-y": {
+        "$type": "dimension",
+        "$value": "{spacing.2}"
+      }
+    },
+    "card": {
+      "color": {
+        "$type": "color",
+        "bg": { "$value": "{semantic.color.bg.secondary}" },
+        "border": { "$value": "{semantic.color.border.subtle}" }
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{border-radius.lg}"
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{shadow.md}"
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{spacing.6}"
+      }
+    },
+    "input": {
+      "color": {
+        "$type": "color",
+        "bg": { "$value": "{semantic.color.bg.primary}" },
+        "border": { "$value": "{semantic.color.border.default}" },
+        "border-focus": { "$value": "{semantic.color.brand.primary}" },
+        "text": { "$value": "{semantic.color.text.primary}" },
+        "placeholder": { "$value": "{semantic.color.text.muted}" }
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{border-radius.md}"
+      }
+    }
+  }
+}

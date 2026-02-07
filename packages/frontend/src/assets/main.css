@@ -1,0 +1,254 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================================
+   層1: プリミティブトークン（生の値）
+   ======================================== */
+:root {
+  /* 藍色系 */
+  --color-ai-50: #e8f4f8;
+  --color-ai-100: #c5dfe8;
+  --color-ai-200: #9dc5d6;
+  --color-ai-300: #6fa8c1;
+  --color-ai-400: #4790ac;
+  --color-ai-500: #165e83;
+  --color-ai-600: #124e6d;
+  --color-ai-700: #0e3e57;
+  --color-ai-800: #0a2e41;
+  --color-ai-900: #0f2350;
+
+  /* 紅系 */
+  --color-kurenai-50: #fce8ed;
+  --color-kurenai-100: #f5b8c7;
+  --color-kurenai-500: #d7003a;
+  --color-kurenai-700: #b7282e;
+  --color-kurenai-900: #8b0020;
+
+  /* ニュートラル */
+  --color-gofun: #fffffc;
+  --color-kinari: #fbfaf5;
+  --color-shironeri: #f3f3f3;
+  --color-nezumi: #949495;
+  --color-gin-nezu: #afafb0;
+  --color-sumi: #595857;
+  --color-shikkoku: #0d0015;
+
+  /* アクセント */
+  --color-yamabuki: #f8b500;
+  --color-kogane: #e6b422;
+  --color-moegi: #aacf53;
+  --color-tokiwa: #007b43;
+  --color-shu: #eb6101;
+
+  /* スペーシング */
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+
+  /* ボーダーラジウス */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  /* シャドウ */
+  --shadow-sm: 0 1px 2px rgba(13, 0, 21, 0.05);
+  --shadow-md: 0 4px 6px rgba(13, 0, 21, 0.07);
+  --shadow-lg: 0 10px 15px rgba(13, 0, 21, 0.1);
+  --shadow-xl: 0 20px 25px rgba(13, 0, 21, 0.12);
+
+  /* フォント */
+  --font-family-body: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+  --font-family-heading: "Shippori Mincho", "Noto Serif JP", serif;
+  --font-family-display: "Zen Antique", "Shippori Mincho", serif;
+  --font-family-mono: "Noto Sans Mono", monospace;
+
+  /* フォントサイズ（Major Third 1.25） */
+  --font-size-xs: 0.64rem;
+  --font-size-sm: 0.8rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.563rem;
+  --font-size-2xl: 1.953rem;
+  --font-size-3xl: 2.441rem;
+  --font-size-4xl: 3.052rem;
+
+  /* フォントウェイト */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* 行間 */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.6;
+  --line-height-relaxed: 1.8;
+
+  /* トランジション */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-in: cubic-bezier(0.4, 0, 1, 1);
+  --easing-out: cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* ========================================
+   層2: セマンティックトークン（ライトモード）
+   ======================================== */
+:root,
+[data-theme="light"] {
+  --color-bg-primary: var(--color-gofun);
+  --color-bg-secondary: var(--color-kinari);
+  --color-bg-surface: var(--color-shironeri);
+  --color-bg-inverse: var(--color-ai-900);
+  --color-text-primary: var(--color-shikkoku);
+  --color-text-secondary: var(--color-sumi);
+  --color-text-muted: var(--color-nezumi);
+  --color-text-inverse: var(--color-gofun);
+  --color-brand-primary: var(--color-ai-500);
+  --color-brand-primary-hover: var(--color-ai-600);
+  --color-brand-primary-active: var(--color-ai-700);
+  --color-accent: var(--color-shu);
+  --color-accent-hover: var(--color-kurenai-500);
+  --color-success: var(--color-tokiwa);
+  --color-warning: var(--color-yamabuki);
+  --color-error: var(--color-kurenai-500);
+  --color-info: var(--color-ai-400);
+  --color-border-default: var(--color-gin-nezu);
+  --color-border-subtle: var(--color-shironeri);
+  --color-border-emphasis: var(--color-ai-500);
+  --color-link: var(--color-ai-500);
+  --color-link-hover: var(--color-ai-700);
+  --color-focus-ring: var(--color-ai-300);
+}
+
+/* ========================================
+   層2: セマンティックトークン（ダークモード）
+   ======================================== */
+[data-theme="dark"] {
+  --color-bg-primary: #1a1a2e;
+  --color-bg-secondary: #16213e;
+  --color-bg-surface: #1f2b47;
+  --color-bg-inverse: var(--color-kinari);
+  --color-text-primary: #e8e8e8;
+  --color-text-secondary: #b0b0b0;
+  --color-text-muted: #808080;
+  --color-text-inverse: var(--color-shikkoku);
+  --color-brand-primary: var(--color-ai-300);
+  --color-brand-primary-hover: var(--color-ai-200);
+  --color-brand-primary-active: var(--color-ai-100);
+  --color-accent: #f0874a;
+  --color-accent-hover: #e07040;
+  --color-success: var(--color-moegi);
+  --color-warning: var(--color-kogane);
+  --color-error: var(--color-kurenai-100);
+  --color-info: var(--color-ai-200);
+  --color-border-default: #3a3a5c;
+  --color-border-subtle: #2a2a44;
+  --color-border-emphasis: var(--color-ai-300);
+  --color-link: var(--color-ai-200);
+  --color-link-hover: var(--color-ai-100);
+  --color-focus-ring: var(--color-ai-400);
+}
+
+/* システム設定に自動追従 */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --color-bg-primary: #1a1a2e;
+    --color-bg-secondary: #16213e;
+    --color-bg-surface: #1f2b47;
+    --color-bg-inverse: var(--color-kinari);
+    --color-text-primary: #e8e8e8;
+    --color-text-secondary: #b0b0b0;
+    --color-text-muted: #808080;
+    --color-text-inverse: var(--color-shikkoku);
+    --color-brand-primary: var(--color-ai-300);
+    --color-brand-primary-hover: var(--color-ai-200);
+    --color-brand-primary-active: var(--color-ai-100);
+    --color-accent: #f0874a;
+    --color-accent-hover: #e07040;
+    --color-success: var(--color-moegi);
+    --color-warning: var(--color-kogane);
+    --color-error: var(--color-kurenai-100);
+    --color-info: var(--color-ai-200);
+    --color-border-default: #3a3a5c;
+    --color-border-subtle: #2a2a44;
+    --color-border-emphasis: var(--color-ai-300);
+    --color-link: var(--color-ai-200);
+    --color-link-hover: var(--color-ai-100);
+    --color-focus-ring: var(--color-ai-400);
+  }
+}
+
+/* ========================================
+   層3: コンポーネントトークン
+   ======================================== */
+:root {
+  --button-bg: var(--color-brand-primary);
+  --button-bg-hover: var(--color-brand-primary-hover);
+  --button-text: var(--color-text-inverse);
+  --button-radius: var(--radius-md);
+  --button-padding-x: var(--spacing-4);
+  --button-padding-y: var(--spacing-2);
+  --card-bg: var(--color-bg-secondary);
+  --card-border: var(--color-border-subtle);
+  --card-radius: var(--radius-lg);
+  --card-shadow: var(--shadow-md);
+  --card-padding: var(--spacing-6);
+  --input-bg: var(--color-bg-primary);
+  --input-border: var(--color-border-default);
+  --input-border-focus: var(--color-brand-primary);
+  --input-text: var(--color-text-primary);
+  --input-placeholder: var(--color-text-muted);
+  --input-radius: var(--radius-md);
+}
+
+/* ========================================
+   ベーススタイル
+   ======================================== */
+@layer base {
+  html {
+    font-family: var(--font-family-body);
+    font-size: 16px;
+    line-height: var(--line-height-normal);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-family-heading);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+  }
+
+  a {
+    color: var(--color-link);
+    transition: color var(--duration-fast) var(--easing-default);
+  }
+
+  a:hover {
+    color: var(--color-link-hover);
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+  }
+}

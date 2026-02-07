@@ -1,0 +1,47 @@
+{
+  "semantic": {
+    "$description": "Semantic tokens for dark mode - Edo night theme",
+    "color": {
+      "$type": "color",
+      "bg": {
+        "primary": { "$value": "#1a1a2e", "$description": "Shinya-ai (deep night indigo)" },
+        "secondary": { "$value": "#16213e", "$description": "Ai-tetsu (iron indigo)" },
+        "surface": { "$value": "#1f2b47", "$description": "Tsukiyo-ai (moonlit indigo)" },
+        "inverse": { "$value": "{color.primitive.neutral.kinari}" }
+      },
+      "text": {
+        "primary": { "$value": "#e8e8e8", "$description": "Tsuki-shiro (moon white)" },
+        "secondary": { "$value": "#b0b0b0", "$description": "Gin-nezu (silver grey)" },
+        "muted": { "$value": "#808080" },
+        "inverse": { "$value": "{color.primitive.neutral.shikkoku}" }
+      },
+      "brand": {
+        "primary": { "$value": "{color.primitive.ai.300}" },
+        "primary-hover": { "$value": "{color.primitive.ai.200}" },
+        "primary-active": { "$value": "{color.primitive.ai.100}" }
+      },
+      "accent": {
+        "default": { "$value": "#f0874a", "$description": "Usu-shu (light vermillion)" },
+        "hover": { "$value": "#e07040" }
+      },
+      "feedback": {
+        "success": { "$value": "{color.primitive.moegi.500}" },
+        "warning": { "$value": "{color.primitive.kogane.500}" },
+        "error": { "$value": "{color.primitive.kurenai.100}" },
+        "info": { "$value": "{color.primitive.ai.200}" }
+      },
+      "border": {
+        "default": { "$value": "#3a3a5c" },
+        "subtle": { "$value": "#2a2a44" },
+        "emphasis": { "$value": "{color.primitive.ai.300}" }
+      },
+      "link": {
+        "default": { "$value": "{color.primitive.ai.200}" },
+        "hover": { "$value": "{color.primitive.ai.100}" }
+      },
+      "focus": {
+        "ring": { "$value": "{color.primitive.ai.400}" }
+      }
+    }
+  }
+}
