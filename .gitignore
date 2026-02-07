@@ -45,17 +45,8 @@ coverage/
 # Docker volumes
 docker-data/
 
-# Deprecated linter/formatter configs (migrated to Biome)
-.prettierrc
-.prettierignore
-eslint.config.js
-packages/frontend/eslint.config.js
-
 # Serena (dev tool)
 .serena/
-
-# Temporary research files
-research_prompt_*.txt
 
 # Compiled config files
 packages/frontend/vite.config.d.ts
