@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# TypeScript
+*.tsbuildinfo
+
+# vue-tsc build artifacts in source directories
+packages/frontend/src/**/*.js
+packages/frontend/src/**/*.js.map
+packages/frontend/src/**/*.d.ts
+packages/frontend/src/**/*.d.ts.map
+!packages/frontend/src/**/*.config.js
+
+# Generated design tokens
+packages/frontend/src/assets/generated/
+
+# Test coverage
+coverage/
+
+# Docker volumes
+docker-data/
+
+# Serena (dev tool)
+.serena/
+
+# Compiled config files
+packages/frontend/vite.config.d.ts
+packages/frontend/vite.config.js

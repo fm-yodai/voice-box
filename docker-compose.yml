@@ -1,0 +1,30 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: voice-box-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-voicebox}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-voicebox}
+      POSTGRES_DB: ${POSTGRES_DB:-voicebox}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-voicebox}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  dynamodb-local:
+    image: amazon/dynamodb-local:latest
+    container_name: voice-box-dynamodb
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath /data"
+    ports:
+      - "${DYNAMODB_PORT:-8000}:8000"
+    volumes:
+      - dynamodb-data:/data
+
+volumes:
+  postgres-data:
+  dynamodb-data:

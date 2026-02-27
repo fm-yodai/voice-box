@@ -1,0 +1,46 @@
+{
+  "name": "@voice-box/frontend",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest run --coverage",
+    "tokens:build": "node scripts/build-tokens.mjs",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@voice-box/shared": "workspace:*",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-vue-next": "^0.563.0",
+    "pinia": "^2.3.1",
+    "radix-vue": "^1.9.17",
+    "tailwind-merge": "^3.4.0",
+    "vue": "^3.5.16",
+    "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/vue": "^8.1.0",
+    "@types/node": "^25.2.1",
+    "@vitejs/plugin-vue": "^5.2.4",
+    "@vitest/coverage-v8": "^4.0.18",
+    "@vue/test-utils": "^2.4.6",
+    "autoprefixer": "^10.4.21",
+    "happy-dom": "^20.5.0",
+    "postcss": "^8.5.4",
+    "style-dictionary": "^4.4.0",
+    "tailwindcss": "^3.4.17",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.9.3",
+    "vite": "^6.3.5",
+    "vitest": "^4.0.18",
+    "vue-tsc": "^2.2.12"
+  }
+}
