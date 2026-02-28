@@ -1,0 +1,21 @@
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
+
+const client = new DynamoDBClient({
+  ...(process.env.DYNAMODB_ENDPOINT && {
+    endpoint: process.env.DYNAMODB_ENDPOINT,
+    region: process.env.AWS_REGION ?? "ap-northeast-1",
+    credentials: {
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID ?? "local",
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY ?? "local",
+    },
+  }),
+});
+
+export const docClient = DynamoDBDocumentClient.from(client, {
+  marshallOptions: {
+    removeUndefinedValues: true,
+  },
+});
+
+export const TABLE_NAME = process.env.DYNAMODB_TABLE_NAME ?? "voice-box";
