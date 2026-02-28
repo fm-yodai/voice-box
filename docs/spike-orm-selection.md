@@ -1,7 +1,7 @@
 # Spike: ORM選定 (Prisma vs Drizzle)
 
 > **Issue**: #19
-> **ステータス**: 完了
+> **ステータス**: 完了（※ [DB 選定 Spike](spike-database-selection.md) により DynamoDB + AWS SDK 直接利用に変更）
 > **結論**: **Drizzle ORM を推奨**
 > **日付**: 2026-02-07
 
