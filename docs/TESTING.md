@@ -17,6 +17,7 @@ pnpm test:coverage
 # Run tests for a specific package
 pnpm --filter @voice-box/backend test
 pnpm --filter @voice-box/frontend test
+pnpm --filter @voice-box/shared test
 ```
 
 ## Test File Conventions
@@ -96,4 +97,4 @@ pnpm test:watch
 
 ## Coverage
 
-Coverage reports are generated using V8 and output to the `coverage/` directory (gitignored). Target a minimum of 80% coverage for new code.
+Coverage reports are generated using V8 and output to the `coverage/` directory (gitignored). A minimum of 80% coverage is enforced in each package's `vitest.config.ts` for lines, functions, branches, and statements. The `pnpm test:coverage` command will fail if any package falls below this threshold.
