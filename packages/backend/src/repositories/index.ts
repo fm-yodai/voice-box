@@ -11,18 +11,18 @@ export type { ResponseRepository } from "./response-repository.js";
 export type { UserRepository } from "./user-repository.js";
 
 export interface Repositories {
-	posts: PostRepository;
-	responses: ResponseRepository;
-	users: UserRepository;
+  posts: PostRepository;
+  responses: ResponseRepository;
+  users: UserRepository;
 }
 
 export function createRepositories(
-	client: DynamoDBDocumentClient,
-	tableName: string,
+  client: DynamoDBDocumentClient,
+  tableName: string
 ): Repositories {
-	return {
-		posts: new DynamoDBPostRepository(client, tableName),
-		responses: new DynamoDBResponseRepository(client, tableName),
-		users: new DynamoDBUserRepository(client, tableName),
-	};
+  return {
+    posts: new DynamoDBPostRepository(client, tableName),
+    responses: new DynamoDBResponseRepository(client, tableName),
+    users: new DynamoDBUserRepository(client, tableName),
+  };
 }
