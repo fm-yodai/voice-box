@@ -12,6 +12,7 @@ concurrency:
 
 env:
   NODE_VERSION: "20"
+  AWS_REGION: ap-northeast-1
 
 jobs:
   typecheck:
@@ -94,6 +95,9 @@ jobs:
     needs: [typecheck, lint, test, build]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     environment: dev
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - uses: actions/checkout@v4
 
@@ -108,7 +112,23 @@ jobs:
 
       - run: pnpm build
 
-      - name: Deploy to dev environment
-        run: echo "TODO - Deploy to dev environment (AWS CDK/SAM)"
-        # TODO: Replace with actual deployment commands
-        # e.g., pnpm --filter @voice-box/backend cdk deploy --context env=dev
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Deploy CDK stacks
+        run: pnpm --filter @voice-box/infra cdk deploy --all --context env=dev --require-approval never
+
+      - name: Deployment summary
+        run: |
+          echo "## Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Stacks Deployed" >> $GITHUB_STEP_SUMMARY
+          echo "- VoiceBox-DynamoDB-dev" >> $GITHUB_STEP_SUMMARY
+          echo "- VoiceBox-Backend-dev" >> $GITHUB_STEP_SUMMARY
+          echo "- VoiceBox-Frontend-dev" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment:** dev" >> $GITHUB_STEP_SUMMARY
+          echo "**Region:** ${{ env.AWS_REGION }}" >> $GITHUB_STEP_SUMMARY
