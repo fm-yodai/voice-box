@@ -2,8 +2,8 @@ import * as fs from "node:fs";
 import * as os from "node:os";
 import * as path from "node:path";
 import * as cdk from "aws-cdk-lib";
-import { Template } from "aws-cdk-lib/assertions";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { Match, Template } from "aws-cdk-lib/assertions";
+import { afterAll, beforeAll, describe, it } from "vitest";
 import { BackendStack } from "../lib/backend-stack.js";
 import type { EnvironmentConfig } from "../lib/config.js";
 import { DynamoDbStack } from "../lib/dynamodb-stack.js";
@@ -20,16 +20,6 @@ const testConfig: EnvironmentConfig = {
 const env = { account: testConfig.account, region: testConfig.region };
 
 describe("DynamoDbStack", () => {
-  it("matches snapshot", () => {
-    const app = new cdk.App();
-    const stack = new DynamoDbStack(app, "TestDynamoDB", {
-      config: testConfig,
-      env,
-    });
-    const template = Template.fromStack(stack);
-    expect(template.toJSON()).toMatchSnapshot();
-  });
-
   it("creates table with correct key schema", () => {
     const app = new cdk.App();
     const stack = new DynamoDbStack(app, "TestDynamoDB", {
@@ -87,24 +77,23 @@ describe("DynamoDbStack", () => {
       ],
     });
   });
+
+  it("uses DESTROY removal policy for dev environment", () => {
+    const app = new cdk.App();
+    const stack = new DynamoDbStack(app, "TestDynamoDB", {
+      config: testConfig,
+      env,
+    });
+    const template = Template.fromStack(stack);
+
+    template.hasResource("AWS::DynamoDB::Table", {
+      DeletionPolicy: "Delete",
+      UpdateReplacePolicy: "Delete",
+    });
+  });
 });
 
 describe("BackendStack", () => {
-  it("matches snapshot", () => {
-    const app = new cdk.App();
-    const dynamoStack = new DynamoDbStack(app, "TestDynamoDB", {
-      config: testConfig,
-      env,
-    });
-    const stack = new BackendStack(app, "TestBackend", {
-      config: testConfig,
-      env,
-      table: dynamoStack.table,
-    });
-    const template = Template.fromStack(stack);
-    expect(template.toJSON()).toMatchSnapshot();
-  });
-
   it("creates Lambda function with correct configuration", () => {
     const app = new cdk.App();
     const dynamoStack = new DynamoDbStack(app, "TestDynamoDB", {
@@ -152,6 +141,61 @@ describe("BackendStack", () => {
         AllowHeaders: ["Content-Type", "Authorization"],
         AllowOrigins: ["*"],
       },
+    });
+  });
+
+  it("grants DynamoDB read/write permissions to Lambda", () => {
+    const app = new cdk.App();
+    const dynamoStack = new DynamoDbStack(app, "TestDynamoDB", {
+      config: testConfig,
+      env,
+    });
+    const stack = new BackendStack(app, "TestBackend", {
+      config: testConfig,
+      env,
+      table: dynamoStack.table,
+    });
+    const template = Template.fromStack(stack);
+
+    template.hasResourceProperties("AWS::IAM::Policy", {
+      PolicyDocument: {
+        Statement: Match.arrayWith([
+          Match.objectLike({
+            Action: Match.arrayWith([
+              "dynamodb:BatchGetItem",
+              "dynamodb:Query",
+              "dynamodb:GetItem",
+              "dynamodb:Scan",
+              "dynamodb:ConditionCheckItem",
+              "dynamodb:BatchWriteItem",
+              "dynamodb:PutItem",
+              "dynamodb:UpdateItem",
+              "dynamodb:DeleteItem",
+              "dynamodb:DescribeTable",
+            ]),
+            Effect: "Allow",
+          }),
+        ]),
+      },
+    });
+  });
+
+  it("creates CloudWatch log group with 2-week retention", () => {
+    const app = new cdk.App();
+    const dynamoStack = new DynamoDbStack(app, "TestDynamoDB", {
+      config: testConfig,
+      env,
+    });
+    const stack = new BackendStack(app, "TestBackend", {
+      config: testConfig,
+      env,
+      table: dynamoStack.table,
+    });
+    const template = Template.fromStack(stack);
+
+    template.hasResourceProperties("AWS::Logs::LogGroup", {
+      LogGroupName: "/aws/lambda/voice-box-api-dev",
+      RetentionInDays: 14,
     });
   });
 });
