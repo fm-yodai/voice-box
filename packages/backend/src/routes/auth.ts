@@ -5,11 +5,7 @@ import {
   fetchGoogleUserInfo,
   getGoogleOAuthConfig,
 } from "../lib/google-oauth.js";
-import {
-  generateAccessToken,
-  generateRefreshToken,
-  verifyRefreshToken,
-} from "../lib/jwt.js";
+import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from "../lib/jwt.js";
 import type { Repositories } from "../repositories/index.js";
 
 type Env = { Variables: { repositories: Repositories } };
