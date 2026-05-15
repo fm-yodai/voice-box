@@ -19,10 +19,10 @@
 | ----------------------- | ------------------------------------------------------------------------------------- |
 | フロントエンド          | Vue 3 + TypeScript, Vite, Tailwind CSS, Pinia, Vue Router                             |
 | バックエンド            | Hono + TypeScript, Zod (バリデーション)                                               |
-| データベース            | PostgreSQL (ローカル), Aurora PostgreSQL (本番)                                       |
-| ORM                     | Drizzle ORM (推奨: [docs/spike-orm-selection.md](docs/spike-orm-selection.md))        |
-| IaC                     | AWS CDK TypeScript (推奨: [docs/spike-iac-selection.md](docs/spike-iac-selection.md)) |
-| インフラ                | AWS Lambda, DynamoDB, Aurora PostgreSQL                                               |
+| データベース            | DynamoDB シングルテーブル設計 ([docs/adr/0001-database-dynamodb.md](docs/adr/0001-database-dynamodb.md)) |
+| データアクセス          | AWS SDK v3 (`@aws-sdk/lib-dynamodb`) 直接利用 + repository パターン。ORM 不使用 ([docs/adr/0002-no-orm.md](docs/adr/0002-no-orm.md)) |
+| IaC                     | AWS CDK TypeScript ([docs/adr/0003-iac-aws-cdk.md](docs/adr/0003-iac-aws-cdk.md))     |
+| インフラ                | AWS Lambda, API Gateway, DynamoDB, S3 + CloudFront                                    |
 | パッケージ管理          | pnpm workspaces (monorepo)                                                            |
 | 言語バージョン          | Node.js v20, pnpm >= 10                                                               |
 | リンター/フォーマッター | Biome (lint + format + import sorting)                                                |
@@ -92,16 +92,13 @@ pnpm dev:frontend   # フロントエンド (Vite dev server)
 
 ### ローカル DB
 
-Docker Compose で PostgreSQL と DynamoDB Local が起動します:
+Docker Compose で DynamoDB Local が起動します:
 
 | サービス       | ポート | 用途                              |
 | -------------- | ------ | --------------------------------- |
-| PostgreSQL     | 5432   | メインデータベース                |
-| DynamoDB Local | 8000   | DynamoDB ローカルエミュレーション |
+| DynamoDB Local | 8000   | メインデータベース（ローカルエミュレーション） |
 
-デフォルトの接続情報:
-
-- PostgreSQL: `voicebox:voicebox@localhost:5432/voicebox`
+接続先は環境変数 `DYNAMODB_PORT`（既定 8000）で調整できます。
 
 ## コマンド一覧
 

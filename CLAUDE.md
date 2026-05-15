@@ -6,6 +6,21 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 voice-box (目安箱) is an anonymous voice box platform for organizations. Employees can submit feedback, bug reports, and suggestions anonymously on public screens, while the system internally tracks author IDs to prevent abuse. An SLA-driven response system ensures submissions are never ignored.
 
+## 作業方針
+
+### 基本ワークフロー
+
+1. **探索** — 関連コード・docs・スキルを十分に読み、変更の影響範囲を把握する
+2. **計画** — 大きな変更は Plan Mode で合意を取ってから実装に入る。曖昧点は `dig` スキルで詰める
+3. **実装** — 計画に基づいて既存パターンに沿って変更する
+4. **検証** — `pnpm check` / `pnpm typecheck` / `pnpm test` を実行して品質を確認する
+
+### コミュニケーション
+
+- 不明点や曖昧な指示があれば、推測せず AskUserQuestion ツールで質問する
+- 複数のアプローチが考えられる場合も判断を仰ぐ
+- 設計判断（明示・暗黙）が発生したら `adr-from-session` で `docs/ADR.md` に記録する
+
 ## Commands
 
 ```bash
@@ -99,3 +114,23 @@ Requires Node.js v20+ (`.nvmrc`), pnpm v10+, Docker Compose for DynamoDB Local (
 ## Language
 
 Project documentation and issues are in Japanese. Code, variable names, and technical identifiers are in English.
+
+## AI エージェントハーネス
+
+セットアップ手順とハーネス全体像は [SETUP.md](SETUP.md) を参照。設計判断の履歴は [docs/ADR.md](docs/ADR.md)。
+
+### スキル（`.claude/skills/`）
+
+ドメイン知識は説明文マッチで自動起動、ワークフローは手動 or 内部呼出し。各スキルは既存 `docs/` を参照する索引＋運用 gotcha として機能し、知識を二重管理しない。
+
+- ドメイン: `project-knowledge`（匿名性ガバナンス）/ `system-design` / `app-architecture` / `dynamodb` / `cdk-infra` / `monorepo-pnpm` / `testing` / `design-system`
+- ワークフロー: `team-dev`（並行実装）/ `compose-issue`（Issue 作成・リッチ化）/ `dig`（曖昧点を詰める）/ `adr-from-session`（ADR 化）
+- コマンド: `/issue`（単一 Issue 対応）
+
+### フック（`.claude/settings.json`）
+
+PreToolUse=保護ファイル書込ブロック / PostToolUse=Biome 自動フォーマット / Stop=検証リマインド / SessionEnd=ADR 棚卸し。secrets は `permissions.deny`。
+
+### 整合性チェック
+
+`bash scripts/lint-harness.sh`（CI: `.github/workflows/harness-lint.yml`）。

@@ -51,3 +51,6 @@ docker-data/
 # Compiled config files
 packages/frontend/vite.config.d.ts
 packages/frontend/vite.config.js
+
+# Claude Code session memory (repo-local; canonical memory is global ~/.claude/projects/)
+.claude/projects/

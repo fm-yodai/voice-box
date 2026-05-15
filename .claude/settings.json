@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(secrets/**)",
+      "Read(**/secrets/**)",
+      "Read(**/*.key)",
+      "Read(**/*.pem)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash scripts/hooks/protect-files.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash scripts/hooks/format-on-save.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "packages/ 配下の .ts/.tsx/.vue/.js/.mjs（コンパイル対象）を変更した場合のみ、以下を確認してください:\n1. pnpm check を実行したか?（Biome lint + format）\n2. pnpm typecheck を実行したか?\n3. テストが存在するファイルを変更した場合、pnpm test を実行したか?\n4. packages/shared を変更した場合、pnpm --filter @voice-box/shared build を実行したか?\n\nすべて満たしている場合のみ yes。\n\n以下は「ソースコード変更なし」扱いで即 yes:\n- 調査・質問応答のみ\n- ドキュメント編集のみ (*.md, docs/, README 等)\n- ハーネス・設定編集のみ (.claude/, .github/, scripts/, *.json)\n\n返答は yes のみ。"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "このセッションで設計判断（明示または暗黙）が行われたか確認すること。\n\n判断とは次のもの:\n- 「採用」「やめる」「こうする」と明示合意した方針\n- 複数案を比較した末に Claude が実装に踏み切った選択\n- CLAUDE.md / docs/ARCHITECTURE.md / 既存 docs/ADR.md と異なる判断\n- ハーネス・運用フローに関する判断\n\n判断が一つでもあれば、adr-from-session スキルを起動して docs/ADR.md に追記する。\n\n判断が無い場合（調査のみ・質問応答のみ・タイポ修正のみ）は何もせず終了する。\n\n返答は yes（スキル起動済み or 起動不要）のみ。"
+          }
+        ]
+      }
+    ]
+  }
+}
