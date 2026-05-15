@@ -38,7 +38,17 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           plugin_marketplaces: 'https://github.com/anthropics/claude-code.git'
           plugins: 'code-review@claude-code-plugins'
-          prompt: '/code-review:code-review ${{ github.repository }}/pull/${{ github.event.pull_request.number }}'
+          # 注: 変数は github.repository（リポジトリ名）と pull_request.number（数値）のみ。
+          # 攻撃者制御の自由文（issue/PR タイトル・本文等）は使用しないため injection リスクなし。
+          prompt: |
+            /code-review:code-review ${{ github.repository }}/pull/${{ github.event.pull_request.number }}
+
+            レビュー完了後、指摘の有無にかかわらず PR に総括コメントを必ず 1 件投稿すること。
+            コメント先頭に判定行を置く:
+            - 問題なし: 「✅ Claude Code Review: 問題なし（LGTM）」+ 確認した観点を 3〜5 行で要約
+            - 指摘あり: 「🔧 Claude Code Review: <件数> 件の指摘」+ 各指摘の要約
+            目的は「問題がない場合でもレビューが実行され合格したことが PR 上で明示的に分かる」ようにすること。
+            これを最優先で遵守する。
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://code.claude.com/docs/en/cli-reference for available options
 
