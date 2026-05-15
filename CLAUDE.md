@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-voice-box (目安箱) is an anonymous voice box platform for organizations. Employees can submit feedback, bug reports, and suggestions anonymously on public screens, while the system internally tracks author IDs to prevent abuse. An SLA-driven response system ensures submissions are never ignored.
+voice-box (目安箱) is an anonymous voice box platform for organizations. Employees can submit feedback, bug reports, and suggestions anonymously on public screens, while the system internally tracks author IDs to prevent abuse. Public visibility of each submission and its response status ensures submissions are never ignored.
 
 ## 作業方針
 

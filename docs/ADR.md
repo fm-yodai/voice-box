@@ -18,6 +18,7 @@ voice-box の設計上の判断を記録するインデックス。詳細は `do
 | [ADR-02](./adr/0002-no-orm.md) | データ・DB | ORM の採否 | ORM 不使用（repository パターン） | 採用 |
 | [ADR-03](./adr/0003-iac-aws-cdk.md) | インフラ・運用 | IaC ツール選定 | AWS CDK (TypeScript) | 採用 |
 | [ADR-04](./adr/0004-agent-harness.md) | ハーネス・ツール | エージェントハーネス構成 | 厚めスキル群＋solo向け settings.json | 暫定 |
+| [ADR-05](./adr/0005-mvp-scope-sla-reframe.md) | プロダクト・スコープ | MVP スコープ確定と「放置しない」担保のリフレーム | 投稿＋公開画面＋運営ステータス＋AI対話的意見構築。SLA計測は非対象 | 暫定 |
 
 ## カテゴリ別
 
@@ -39,3 +40,9 @@ voice-box の設計上の判断を記録するインデックス。詳細は `do
 | ID | テーマ | 選択 | 根拠 |
 |----|--------|------|------|
 | [ADR-04](./adr/0004-agent-harness.md) | エージェントハーネス構成 | thanks-card 構造を solo・Biome・CDK 実態に適応 | 既存 docs/ と二重管理せず索引化 |
+
+### プロダクト・スコープ
+
+| ID | テーマ | 選択 | 根拠 |
+|----|--------|------|------|
+| [ADR-05](./adr/0005-mvp-scope-sla-reframe.md) | MVP スコープと「放置しない」担保 | 投稿＋公開画面＋運営ステータス＋AI対話的意見構築。SLA計測は非対象・透明性で担保 | Sprint に落とせる受け入れ基準を確定。品質優先でスコープを絞る |
