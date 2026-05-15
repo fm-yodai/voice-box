@@ -111,11 +111,13 @@ Each agent prompt MUST include:
 You are the "{role}" agent on team "{team_name}".
 
 ## Project context
-- pnpm monorepo at /home/yodai/dev/voice-box
-- packages/frontend: Vue 3 + Vite + Tailwind CSS v3
-- packages/backend: Node.js + TypeScript
-- packages/shared: Shared types and utilities
+- pnpm monorepo at /home/yodai/voice-box
+- packages/frontend: Vue 3 + Vite + Tailwind CSS + Pinia
+- packages/backend: Hono REST API (Lambda + local dev dual-mode), repository pattern
+- packages/shared: Zod schemas (single source of truth for types)
+- packages/infra: AWS CDK (Lambda, API Gateway, DynamoDB, S3+CloudFront)
 - Design tokens: design/tokens/ (DTCG format)
+- Lint/format: Biome (`pnpm check`). Tests: Vitest. Build shared before frontend/backend.
 
 ## Your assignment
 {detailed task description with specific file paths}

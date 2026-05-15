@@ -1,0 +1,23 @@
+name: harness-lint
+
+# 注: このワークフローは github.event 等の信頼できない入力を一切使用しない（コマンドインジェクション無し）。
+on:
+  pull_request:
+    paths:
+      - ".claude/**"
+      - "CLAUDE.md"
+      - "SETUP.md"
+      - "scripts/hooks/**"
+      - "scripts/lint-harness.sh"
+      - "docs/ADR.md"
+      - "docs/adr/**"
+      - ".github/workflows/harness-lint.yml"
+  push:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash scripts/lint-harness.sh
